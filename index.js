@@ -41,6 +41,13 @@ app.get('/api/notes/:id', (request, response) => {
   } 
 })
 
+app.put('/api/notes/:id', (request, response) => {
+  const id = Number(request.params.id);
+  const updated = notes.find(n => n.id===id)
+  notes = notes.map(note => note.id === id ? request.body : note)
+  response.json(request.body);
+})
+
 app.delete('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   notes = notes.filter(note => note.id !== id)
